@@ -1,3 +1,7 @@
+// export const range = (x, y) => {
+//     return [...Array(y).keys()].filter(a => a >= x);
+// }
+
 // removes duplicates from the given array 
 export const getUniqueValues = (array) => {
     return array.filter((s, i) => array.indexOf(s) === i);
@@ -19,9 +23,9 @@ export const convertPower = (equ) => {
 
 // converts a given string to actual function
 // @TODO: needed?
-export const parseFunction = (equ) => {
-    return eval('(' + extractArguments(equ).join(',') + ') => ' + convertPower(equ));
-}
+// export const parseFunction = (equ) => {
+//     return eval('(' + extractArguments(equ).join(',') + ') => ' + convertPower(equ));
+// }
 
 // adds slack variables to given inequality
 export const convertToSlack = (equ, index) => {
@@ -43,9 +47,47 @@ export const convertToSlack = (equ, index) => {
     return equ[0] + ' + ' + sign + '1 * S' + index + ' + ' + (equ[1].charAt(0) === '-' ? equ[1].substring(1) : '-' + equ[1]);
 }
 
+export const convertToSlackMinimize = (equ, variable) => {
+    let sign;
+
+    if(equ.indexOf('<=') >= 0) {
+        // positive slack
+        equ = equ.split('<=').map(e => e.trim());
+
+        sign = '';
+    }
+    else {
+        // negative slack
+        equ = equ.split('>=').map(e => e.trim());
+
+        sign = '-';
+    }
+
+    return equ[0] + ' + ' + sign + '1 * ' + variable + ' + ' + (equ[1].charAt(0) === '-' ? equ[1].substring(1) : '-' + equ[1]);
+}
+
+export const convertToMinimization = (equ) => {
+    let sign;
+
+    if(equ.indexOf('>=') >= 0) {
+        // positive slack
+        equ = equ.split('>=').map(e => e.trim());
+
+        sign = '-';
+    }
+    else {
+        // negative slack
+        equ = equ.split('<=').map(e => e.trim());
+
+        sign = '';
+    }
+
+    return equ[0] + ' + ' + sign + equ[1];
+}
+
 // converts to an objective function form
 export const toObjectiveFunction = (equ) => {
-    return equ.split(' ').map(t => /^[0-9]+$/.test(t) ? '-' + t : t).join(' ') + ' + 1 * Z';
+    return equ.split(' ').map(t => /^[0-9]+(\.[0-9]+)?$/.test(t) ? '-' + t : t).join(' ') + ' + 1 * Z';
 }
 
 // gets all variables from a system of linear equation
@@ -64,10 +106,43 @@ export const toAugCoeff = (listEqu) => {
         const equSplitted = equ.split(' ');
 
         return [
-            ...variables.map(variable => {
-                return parseInt(equSplitted[equSplitted.indexOf(variable) - 2], 10) || 0;
-            }),
-            equSplitted[equSplitted.length - 1] === 'Z' ? 0 : -parseInt(equSplitted[equSplitted.length - 1], 10)
+            ...variables.map(variable =>
+                parseFloat(equSplitted[equSplitted.indexOf(variable) - 2]) || 0
+            ),
+            equSplitted[equSplitted.length - 1] === 'Z' ? 0 : -parseFloat(equSplitted[equSplitted.length - 1])
         ]
     });
+}
+
+// shifts a given char to the right by offset
+export const asciiAdjust = (char, offset) => {
+    const charCode = char.charCodeAt(0);
+
+    let startCode;
+
+    if(charCode >= 97) {
+        startCode = 97;
+    }
+    else {
+        startCode = 65;
+    }
+
+    return String.fromCharCode((((charCode + offset) - startCode) % 26) + startCode);
+} 
+
+export const toEquationString = (variables, row) => {
+    return row
+        .filter(a => !isNaN(a))
+        .map((n, i) => variables[i] ? n + ' * ' + asciiAdjust(variables[i], 5) : n)
+        .join(' + ');
+}
+
+export const toInequality = (equ) => {
+    const equSplitted = equ.split(' ');
+
+    const rhs = parseFloat(equSplitted[equSplitted.length - 1]);
+
+    equSplitted[equSplitted.length - 2] = rhs > 0 ? '<=' : '>=';
+
+    return equSplitted.join(' ');
 }

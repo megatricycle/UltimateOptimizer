@@ -8,12 +8,11 @@ import {
 
 const init = {
     goal: GOAL_MINIMIZE,
-    objectiveFunction: '150 * x1 + 175 * x2',
+    objectiveFunction: '1 * a + 1 * b + 1 * c',
     constraints: [
-        '7 * x1 + 11 * x2 <= 77',
-        '10 * x1 + 8 * x2  <= 80',
-        '1 * x1 <= 9',
-        '1 * x2 <= 6'
+        '1 * a + 2 * b + 1 * c >= 30',
+        '0 * a + 6 * b + 1 * c <= 54',
+        '1 * a + 1 * b + 2 * c >= 20'
     ]
 };
 

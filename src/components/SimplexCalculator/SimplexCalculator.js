@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-    convertToSlack,
-    toObjectiveFunction,
-    getAllVariables,
-    toAugCoeff
-} from '../../logic/equation';
+import { simplexMethod } from '../../logic/simplex';
 import './SimplexCalculator.css';
 
 class SimplexCalculator extends Component {
@@ -50,16 +45,14 @@ class SimplexCalculator extends Component {
 
     onOptimizeClick() {
         const goal = this.props.state.goal;
-        const objectiveFunction = toObjectiveFunction(this.props.state.objectiveFunction);
-        const constraints = this.props.state.constraints.map((c, i) => convertToSlack(c, i + 1));
+        const objectiveFunction = this.props.state.objectiveFunction;
+        const constraints = this.props.state.constraints;
 
-        const toBeAugCoeff = [
-            ...constraints,
-            objectiveFunction
-        ];
-
-        console.log('Variables:');
-        console.table(toAugCoeff(toBeAugCoeff));
+        const answer = simplexMethod(objectiveFunction, constraints, goal);
+        
+        console.table(answer.answer.tableu);
+        console.table(answer.answer.basicSolution);
+        console.log(answer.logs)
     }
 
     render() {
