@@ -8,12 +8,8 @@ import {
 
 const init = {
     goal: GOAL_MINIMIZE,
-    objectiveFunction: '1 * a + 1 * b + 1 * c',
-    constraints: [
-        '1 * a + 2 * b + 1 * c >= 30',
-        '0 * a + 6 * b + 1 * c <= 54',
-        '1 * a + 1 * b + 2 * c >= 20'
-    ]
+    objectiveFunction: '',
+    constraints: []
 };
 
 const simplexCalculatorReducer = (state = init, action) => {
