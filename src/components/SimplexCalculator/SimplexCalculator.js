@@ -44,7 +44,7 @@ class SimplexCalculator extends Component {
     render() {
         return (
             <div className="SimplexCalculator">
-                <p>Ultimate Optmizer</p>
+                <p>Simplex Calculator</p>
 
                 <span>Goal: </span>
                 <br/>
