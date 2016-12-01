@@ -8,8 +8,13 @@ import {
 
 const init = {
     goal: GOAL_MINIMIZE,
-    objectiveFunction: "",
-    constraints: []
+    objectiveFunction: '150 * x1 + 175 * x2',
+    constraints: [
+        '7 * x1 + 11 * x2 <= 77',
+        '10 * x1 + 8 * x2  <= 80',
+        '1 * x1 <= 9',
+        '1 * x2 <= 6'
+    ]
 };
 
 const simplexCalculatorReducer = (state = init, action) => {
@@ -30,7 +35,7 @@ const simplexCalculatorReducer = (state = init, action) => {
             return Object.assign({}, state, {
                 constraints: [
                     ...state.constraints, action.constraint
-                ]
+                ].filter(c => c !== '')
             });
         }
 
@@ -42,7 +47,7 @@ const simplexCalculatorReducer = (state = init, action) => {
                     }
 
                     return constraint;
-                })
+                }).filter(c => c !== '')
             });
         }
 

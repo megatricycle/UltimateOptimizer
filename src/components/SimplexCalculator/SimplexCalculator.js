@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+import {
+    convertToSlack,
+    toObjectiveFunction,
+    getAllVariables,
+    toAugCoeff
+} from '../../logic/equation';
 import './SimplexCalculator.css';
 
 class SimplexCalculator extends Component {
@@ -10,6 +16,7 @@ class SimplexCalculator extends Component {
         this.onObjectiveFunctionBlur = this.onObjectiveFunctionBlur.bind(this);
         this.onConstraintOldBlur = this.onConstraintOldBlur.bind(this);
         this.onConstraintNewBlur = this.onConstraintNewBlur.bind(this);
+        this.onOptimizeClick = this.onOptimizeClick.bind(this);
     }
 
     onGoalClick(e) {
@@ -41,6 +48,20 @@ class SimplexCalculator extends Component {
         newConstraintField.value = '';
     }
 
+    onOptimizeClick() {
+        const goal = this.props.state.goal;
+        const objectiveFunction = toObjectiveFunction(this.props.state.objectiveFunction);
+        const constraints = this.props.state.constraints.map((c, i) => convertToSlack(c, i + 1));
+
+        const toBeAugCoeff = [
+            ...constraints,
+            objectiveFunction
+        ];
+
+        console.log('Variables:');
+        console.table(toAugCoeff(toBeAugCoeff));
+    }
+
     render() {
         return (
             <div className="SimplexCalculator">
@@ -69,6 +90,7 @@ class SimplexCalculator extends Component {
                 <span>Objective function: Z = </span>
                 <input
                     type="text"
+                    defaultValue={this.props.state.objectiveFunction}
                     onBlur={this.onObjectiveFunctionBlur}
                 />
 
@@ -93,6 +115,13 @@ class SimplexCalculator extends Component {
                         onBlur={this.onConstraintNewBlur}
                         placeholder="Add Constraint"
                     />
+                </div>
+                <div>
+                    <button
+                        onClick={this.onOptimizeClick}
+                    >
+                        Optimize
+                    </button>
                 </div>
             </div>
         );
