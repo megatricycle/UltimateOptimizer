@@ -1,8 +1,8 @@
-export const STATE_UPDATE = "STATE_UPDATE";
+import * as constants from '../constants/appConstants';
 
 export function updateState(state) {
     return {
-        type: STATE_UPDATE,
+        type: constants.STATE_UPDATE,
         state: state
     };
 }

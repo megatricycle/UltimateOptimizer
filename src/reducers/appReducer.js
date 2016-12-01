@@ -1,5 +1,5 @@
 const init = {
-    text: "App"
+    state: "App"
 };
 
 const appOptmizerReducer = (state = init, action) => {

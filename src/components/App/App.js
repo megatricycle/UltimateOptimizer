@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Navbar from '../Navbar/Navbar';
-import UltimateOptimizer from '../../containers/UltimateOptimizerContainer';
+import SimplexCalculator from '../../containers/SimplexCalculatorContainer';
 import DietOptimizer from '../../containers/DietOptimizerContainer';
 
 import './App.css';
@@ -13,8 +13,10 @@ class App extends Component {
                 <div className="App-navbar">
                     <Navbar/>
                 </div>
+                <hr/>
                 <div className="App-body">
-                    <UltimateOptimizer/>
+                    <SimplexCalculator/>
+                    <hr/>
                     <DietOptimizer/>
                 </div>
             </div>
