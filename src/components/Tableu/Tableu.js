@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 class Tableu extends Component {
     render() {
         const unknowns = this.props.unknowns;
-        const tableu = this.props.tableu;
-
+        
         return (
             <div className="Tableu">
                 <table className="table">

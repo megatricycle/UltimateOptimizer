@@ -8,14 +8,13 @@ import {
 } from '../constants/simplexCalculatorConstants';
 
 const init = {
-    // goal: GOAL_MINIMIZE,
-    goal: 1,
-    objectiveFunction: '150 * x1 + 175 * x2',
+    goal: GOAL_MINIMIZE,
+    objectiveFunction: '1 * a + 0.5 * b + 2.5 * c + 3 * d',
     constraints: [
-        '7 * x1 + 11 * x2 <= 77',
-        '10 * x1 + 8 * x2 <= 80',
-        '1 * x1 <= 9',
-        '1 * x2 <= 6',
+        '1.5 * a + 1 * b + 0 * c + 2 * d >= 35',
+        '0 * a + 2 * b + 6 * c + 4 * d >= 120',
+        '1 * a + 1 * b +  1 * c + 1 * d >= 50',
+        '0.5a + 2.5c + 1.5d >= 75'
     ],
     solution: null
 };

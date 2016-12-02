@@ -131,6 +131,8 @@ export const asciiAdjust = (char, offset) => {
 } 
 
 export const toEquationString = (variables, row) => {
+    console.log(row);
+
     return row
         .filter(a => !isNaN(a))
         .map((n, i) => variables[i] ? n + ' * ' + asciiAdjust(variables[i], 5) : n)
@@ -139,6 +141,8 @@ export const toEquationString = (variables, row) => {
 
 export const toInequality = (equ) => {
     const equSplitted = equ.split(' ');
+
+    console.log(equSplitted);
 
     const rhs = parseFloat(equSplitted[equSplitted.length - 1]);
 

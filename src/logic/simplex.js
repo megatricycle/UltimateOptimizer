@@ -119,7 +119,11 @@ export const simplexMethod = (objectiveFunction, constraints, goal) => {
 
         let tableu = toAugCoeff(toBeAugCoeff);
 
+        console.table(tableu);
+
         tableu = math.transpose(math.matrix(tableu)).toArray();
+
+        console.table(tableu);
 
         const tableuEquationString = tableu.map(row => toEquationString(unknowns, row));
 

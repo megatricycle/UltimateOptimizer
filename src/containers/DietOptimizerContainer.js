@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { toggleFood } from '../actions/dietOptimizerActions';
 import DietOptimizer from '../components/DietOptimizer/DietOptimizer';
 
 const mapStateToProps = (state) => {
@@ -10,6 +11,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        toggleFood(food) {
+            dispatch(toggleFood(food));
+        }
     };
 };
 
