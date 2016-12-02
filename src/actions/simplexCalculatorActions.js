@@ -28,3 +28,10 @@ export function editConstraint(index, constraint) {
         constraint
     };
 }
+
+export function setSolution(solution) {
+    return {
+        type: constants.SOLUTION_SET,
+        solution
+    }
+}

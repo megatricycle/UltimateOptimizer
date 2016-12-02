@@ -4,7 +4,8 @@ import {
 } from '../constants/appConstants';
 
 const init = {
-    state: START_PAGE
+    // state: START_PAGE
+    state: 1
 };
 
 const appOptmizerReducer = (state = init, action) => {

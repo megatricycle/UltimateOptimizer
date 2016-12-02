@@ -5,3 +5,4 @@ export const GOAL_SET               = "GOAL_SET";
 export const OBJECTIVE_FUNCTION_SET = "OBJECTIVE_FUNCTION_SET";
 export const CONSTRAINTS_ADD        = "CONSTRAINTS_ADD";
 export const CONSTRAINTS_EDIT       = "CONSTRAINTS_EDIT";
+export const SOLUTION_SET           = "SOLUTION_SET";

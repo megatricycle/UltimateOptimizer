@@ -3,13 +3,21 @@ import {
     GOAL_MINIMIZE,
     OBJECTIVE_FUNCTION_SET,
     CONSTRAINTS_ADD,
-    CONSTRAINTS_EDIT
+    CONSTRAINTS_EDIT,
+    SOLUTION_SET
 } from '../constants/simplexCalculatorConstants';
 
 const init = {
-    goal: GOAL_MINIMIZE,
-    objectiveFunction: '',
-    constraints: []
+    // goal: GOAL_MINIMIZE,
+    goal: 1,
+    objectiveFunction: '150 * x1 + 175 * x2',
+    constraints: [
+        '7 * x1 + 11 * x2 <= 77',
+        '10 * x1 + 8 * x2 <= 80',
+        '1 * x1 <= 9',
+        '1 * x2 <= 6',
+    ],
+    solution: null
 };
 
 const simplexCalculatorReducer = (state = init, action) => {
@@ -43,6 +51,12 @@ const simplexCalculatorReducer = (state = init, action) => {
 
                     return constraint;
                 }).filter(c => c !== '')
+            });
+        }
+
+        case SOLUTION_SET: {
+            return Object.assign({}, state, {
+                solution: action.solution
             });
         }
 

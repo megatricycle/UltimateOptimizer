@@ -193,6 +193,7 @@ export const simplexMethod = (objectiveFunction, constraints, goal) => {
             tableu,
             basicSolution: basicSolution.filter(a => !/^S[0-9]+$/.test(a.variable))
         },
-        logs
+        logs,
+        unknowns
     };
 }

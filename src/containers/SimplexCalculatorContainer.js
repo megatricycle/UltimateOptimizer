@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         editConstraint(index, constraint) {
             dispatch(actions.editConstraint(index, constraint));
+        },
+        setSolution(solution) {
+            dispatch(actions.setSolution(solution));
         }
     };
 };
