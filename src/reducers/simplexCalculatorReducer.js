@@ -9,13 +9,8 @@ import {
 
 const init = {
     goal: GOAL_MINIMIZE,
-    objectiveFunction: '1 * a + 0.5 * b + 2.5 * c + 3 * d',
-    constraints: [
-        '1.5 * a + 1 * b + 0 * c + 2 * d >= 35',
-        '0 * a + 2 * b + 6 * c + 4 * d >= 120',
-        '1 * a + 1 * b +  1 * c + 1 * d >= 50',
-        '0.5a + 2.5c + 1.5d >= 75'
-    ],
+    objectiveFunction: '',
+    constraints: [],
     solution: null
 };
 
