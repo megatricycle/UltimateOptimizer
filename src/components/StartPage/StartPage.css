@@ -1,0 +1,35 @@
+.StartPage {
+    width: 100%;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.choices-container {
+    margin-top: 5em;
+    display: flex;
+    flex-direction: row;
+}
+
+.choice-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5em;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.choice-container .icon {
+    font-size: 124px;
+    height: 130px;
+    line-height: 130px;
+    width: 130px;
+}
+
+.choice-label {
+    margin-top: 0.5em;
+    font-size: 2em;
+}
